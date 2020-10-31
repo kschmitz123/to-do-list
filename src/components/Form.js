@@ -1,13 +1,12 @@
 import { useState } from "react";
 import "./form.css";
-import { saveTask } from "../utils/storage";
+import { saveTask } from "../utils/saveTask";
+import { getTask } from "../utils/getTask";
 import ToDoList from "./ToDoList";
 
 export default function Input({ prop }) {
   const [task, setTask] = useState(null);
-  const [todos, setTodos] = useState(
-    JSON.parse(localStorage.getItem("tasks")) || []
-  );
+  const [todos, setTodos] = useState(getTask());
 
   const submit = (event) => {
     event.preventDefault();
@@ -16,7 +15,7 @@ export default function Input({ prop }) {
     setTask("");
   };
 
-  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const tasks = getTask();
 
   return (
     <div className="container">
